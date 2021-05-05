@@ -1,0 +1,69 @@
+.dark-theme
+    @include setColor($color: $light-gray)
+
+.dark-theme
+    .weather-today
+        @include setColor($dark, $light-gray)
+        .btn-search-city
+            color: $light-gray
+
+    .search-panel
+        @include setColor($dark)
+        .wrapper
+            background: none
+            .search-input
+                @include setColor(transparent, $light-gray)
+
+    .close-btn
+        .container
+            span:first-child
+                @include setColor($light-gray)
+            span:last-child
+                @include setColor($light-gray)
+
+    .weather-details
+        @include setColor(#100E1C, $light-gray)
+        box-shadow: 0 0.2rem 1.5rem 0.2rem rgba(0, 0, 0, 0.2) inset
+
+        .weather-details__week,
+        .weather-details__hourly
+            @include setColor($color: #6D6D6D)
+            &.active
+                border-bottom-color: $light-gray
+                @include setColor($color: $light-gray)
+
+        .weather-details__header
+            @include setColor($color: $light-gray)
+
+        .weather-slider__item
+            @include setColor($dark, $light-gray)
+
+        .weather-slider__item-title,
+        .weather-slider__degree-max
+            @include setColor($color: $light-gray)
+
+        .weather-slider__degree-min
+            @include setColor($color: #6D6D6D)
+
+        .arrow-prev,
+        .arrow-next
+            @include setColor($dark)
+            &.inactive
+                span
+                    @include setColor(#484848)
+
+        .details__today-title
+            color: $light-gray
+
+        .details__today-item
+            @include setColor($dark)
+
+        .details__today-item__descr,
+        .details__today-item__title
+            color: $light-gray
+
+        .details__today-item__range
+            color: $light-gray
+
+        .wind-route-text
+            color: $light-gray

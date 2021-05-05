@@ -1,0 +1,83 @@
+@media (max-width:1024px)
+    .App
+        grid-template-columns: minmax(25rem, 33rem) minmax(40rem, auto)
+
+    .weather-details
+        padding: 0 13rem
+        .wrapper
+            margin: 6rem auto
+
+    .search-form
+        flex-direction: column
+        align-items: center
+        &__input
+            width: 100%
+
+    .btn-search__m-top
+        margin-top: 2rem
+
+    .weather-today
+        background-position: center 33%
+        .wrapper
+            padding: 5rem 2rem
+
+    .weather-today__conditions-img
+        margin-top: 22rem
+
+    .weather-today__degrees
+        margin-top: 20rem
+
+    .search-input
+        width: 100%
+
+@media (max-width:940px)
+    .App
+        grid-template-columns: minmax(26rem, auto) minmax(50rem, auto)
+
+    .weather-today
+        background-position: center 33%
+        .wrapper
+            padding: 5.3rem 1.2rem
+
+    .btn-search-city
+        width: 16rem
+
+    .weather-details
+        padding: 0 7.2rem
+
+@media (max-width:760px)
+    .App
+        grid-template-columns: minmax(37.5rem, auto)
+
+    .weather-today
+        .wrapper
+            padding: 3rem
+
+    .weather-details
+        padding: 0 3rem
+        .wrapper
+            margin-bottom: 2rem
+
+    .weather-details__header
+        grid-template-columns: auto
+        grid-template-rows: 1fr 1fr
+        gap: 2rem
+        justify-items: center
+    .weather-slider__arrows
+        display: none
+    .weather-slider-week
+        overflow: inherit
+        height: 100%
+        justify-content: space-evenly
+    .weather-details__tabs
+        gap: 3rem
+        justify-content: center
+
+    .weather-today__conditions-img
+        margin-top: 2.4rem
+
+    .weather-today__degrees
+        margin-top: 0
+
+    .search-input
+        width: 100%

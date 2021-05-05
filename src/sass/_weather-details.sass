@@ -1,0 +1,177 @@
+.weather-details
+    @include setColor(#F1F1F1)
+    padding: 0 7.8rem
+    transition: 0.5s
+    box-shadow: 0rem -0.5rem 1rem 0rem rgba(30, 60, 80, 0.2) inset
+    .wrapper
+        max-width: 720px
+        width: 100%
+        margin: 4.2rem auto
+
+.weather-details__header
+    display: grid
+    grid-template-columns: 125px 130px 130px
+    align-items: end
+
+.weather-details__tabs
+    display: grid
+    grid-template-columns: repeat(2, auto)
+
+.weather-details__title
+    font-weight: 700
+    font-size: 2.4rem
+    line-height: 0
+    margin-right: 2.4rem
+
+.weather-details__week
+    font-weight: 700
+    font-size: 2rem
+    display: inline-block
+    margin-right: 1.6rem
+    white-space: nowrap
+    border-bottom: 3px solid transparent
+    transition: border-width 0.5
+    border: none
+    cursor: pointer
+    @include setColor(transparent, $hint)
+    &.active
+        color: $gray
+        border-bottom: 3px solid $gray
+
+.weather-details__hourly
+    font-weight: 700
+    font-size: 2rem
+    display: inline-block
+    border: none
+    border-bottom: 3px solid transparent
+    cursor: pointer
+    @include setColor(transparent,$hint)
+    &.active
+        border-bottom: 3px solid $gray
+
+.weather-slider
+    margin-top: 1.8rem
+    position: relative
+
+.weather-slider-week
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(100px, 100px))
+    justify-content: center
+    gap: 2.4rem 2.4rem
+    position: relative
+    z-index: 10
+    width: 100%
+    height: 143px
+    overflow: hidden
+
+.weather-slider-hourly
+    display: none
+
+.weather-slider__item
+    position: relative
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    box-shadow: 0px 7px 12px rgba(0, 0, 0, 0.05)
+    border-radius: 8.5px
+    margin-right: 2.4rem
+    min-width: 100px
+    min-height: 143px
+    padding: 1.7rem 0
+    @include setColor(#fff)
+    &.weather-slider__item:last-child
+        margin-right: 0
+
+.weather-slider__item-title
+    font-size: 1.4rem
+    font-weight: 400
+    @include setColor($color: $gray)
+
+.weather-slider__item-degree
+    width: 100%
+    display: flex
+    justify-content: space-evenly
+
+.weather-slider__degree-max
+    font-size: 1.4rem
+    font-weight: 400
+    @include setColor($color: $gray)
+
+.weather-slider__degree-min
+    font-size: 1.4rem
+    font-weight: 400
+    @include setColor($color: $gray)
+
+.weather-slider__item-img
+    position: absolute
+    top: 14%
+
+.weather-slider__arrows
+    position: absolute
+    display: flex
+    justify-content: space-between
+    align-items: center
+    top: 50%
+    width: 100%
+    transform: translateY(-50%)
+    .arrow-prev
+        top: 50%
+        left: -5rem
+    .arrow-next
+        top: 50%
+        right: -5rem
+
+.arrow-prev,
+.arrow-next
+    position: relative
+    width: 3rem
+    height: 3rem
+    border-radius: 100%
+    cursor: pointer
+    @include setColor(#fff)
+    span:first-child
+        display: block
+        width: 1.2rem
+        height: 0.3rem
+        @include setColor(#ACACAC)
+    span:last-child
+        display: block
+        width: 1.2rem
+        height: 0.3rem
+        @include setColor(#ACACAC)
+
+.arrow-prev
+    span:first-child
+        position: relative
+        top: 35%
+        left: 45%
+        transform: translate(-50%) rotate(-35deg)
+        border-radius: 1rem
+    span:last-child
+        position: relative
+        top: 45%
+        left: 45%
+        transform: translate(-50%) rotate(35deg)
+        border-radius: 1rem
+    &.inactive
+        span
+            color:
+            @include setColor(#e7e7e7)
+
+.arrow-next
+    span:first-child
+        position: relative
+        top: 35%
+        left: 35%
+        transform: rotate(35deg)
+        border-radius: 1rem
+    span:last-child
+        position: relative
+        top: 45%
+        left: 35%
+        transform: rotate(-35deg)
+        border-radius: 1rem
+    &.active
+        span
+            @include setColor(#e7e7e7)

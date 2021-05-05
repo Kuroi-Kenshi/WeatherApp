@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Приложение прогноза погоды">
+    <title>Weather App</title>
+    <link rel="shortcut icon" href="./icons/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/normolize.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+    <main class="App" id="App">
+        <section class="weather-today">
+            <!-- <img src="./img/cloud-desktop.png" alt="" class="back-img"> -->
+            <div class="wrapper">
+                <div class="weather-today__panel">
+                    <button id="btn-search" class="btn-search-city">Поиск города</button>
+                    <div class="theme-switcher" id="theme-switcher">
+                        <div>
+                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.6067 2.12132C9.83451 1.34916 8.89689 0.8358 7.9126 0.572756C8.44717 2.57528 7.93381 4.79418 6.36403 6.36396C4.79425 7.93374 2.57535 8.4471 0.572826 7.91253C0.83587 8.89682 1.34923 9.83444 2.12139 10.6066C4.46333 12.9485 8.26473 12.9485 10.6067 10.6066C12.9486 8.26466 12.9486 4.46326 10.6067 2.12132Z"
+                                    fill="#E6E6E6" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="weather-today__info">
+                    <div class="weather-today__conditions">
+                        <img src="./icons/snowflake.svg" alt="condition" class="weather-today__conditions-img">
+                        <div class="weather-today__degrees">
+                            1 <span>&degC</span>
+                        </div>
+                        <div class="weather-today__conditions-descr">Снег</div>
+                        <div class="weather-today__feels-like">Ощущается как -3 &deg<span>C</span></div>
+                    </div>
+                </div>
+                <div class="weather-today__date">
+                    <div>Сегодня</div>
+                    <div>Вс, 13 мар</div>
+                </div>
+                <div class="weather-today__location">
+                    <img src="./icons/location-pic.svg" alt="">
+                    <div>Москва</div>
+                </div>
+
+                <div class="search-panel" id="search-panel">
+                    <div class="wrapper">
+                        <div class="close-btn">
+                            <div class="container" id="close-btn">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="search-form">
+                            <div class="search-form__input">
+                                <input type="search" class="search-input" placeholder="Москва">
+                            </div>
+                            <button class="btn-search-city btn-search__small btn-search__m-top">Найти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="weather-details">
+            <div class="wrapper">
+                <div class="weather-details__header">
+                    <h1 class="weather-details__title">Прогноз</h1>
+                    <div class="weather-details__tabs">
+                        <button class="weather-details__week active">на неделю</button>
+                        <button class="weather-details__hourly">почасовой</button>
+                    </div>
+                </div>
+                <div class="weather-slider">
+                    <ul class="weather-slider-week">
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Завтра</div>
+                            <img src="./icons/fog.svg" alt="fog" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Пн, 15 мар</div>
+                            <img src="./icons/rainy.svg" alt="rainy" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Вт, 16 мар</div>
+                            <img src="./icons/rainy.svg" alt="rainy" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Ср, 17 мар</div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Чт, 18 мар</div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Пт, 19 мар</div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title">Сб, 20 мар</div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max">10 &degC</div>
+                                <div class="weather-slider__degree-min">4 &degC</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="weather-slider-hourly">
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title"></div>
+                            <img src="./icons/fog.svg" alt="fog" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max"></div>
+                                <div class="weather-slider__degree-min"></div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title"></div>
+                            <img src="./icons/rainy.svg" alt="rainy" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max"></div>
+                                <div class="weather-slider__degree-min"></div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title"></div>
+                            <img src="./icons/rainy.svg" alt="rainy" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max"></div>
+                                <div class="weather-slider__degree-min"></div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title"></div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max"></div>
+                                <div class="weather-slider__degree-min"></div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title"></div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max"></div>
+                                <div class="weather-slider__degree-min"></div>
+                            </div>
+                        </li>
+                        <li class="weather-slider__item">
+                            <div class="weather-slider__item-title"></div>
+                            <img src="./icons/storm.svg" alt="storm" class="weather-slider__item-img">
+                            <div class="weather-slider__item-degree">
+                                <div class="weather-slider__degree-max"></div>
+                                <div class="weather-slider__degree-min"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="weather-slider__arrows">
+                        <div class="arrow-prev inactive">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="arrow-next">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details__today">
+                    <h2 class="details__today-title">Подробно на сегодня</h2>
+                    <div class="details__today-items">
+                        <div class="details__today-item">
+                            <div class="details__today-item__title">Скорость ветра</div>
+                            <div class="details__today-item__descr">7 <span>м/с</span></div>
+                            <div class="details__today-item__indicator">
+                                <div class="wind-route-img">
+                                    <img src="./icons/wind-route.svg" alt="wind-route">
+                                </div>
+                                <div class="wind-route-text">СЗ</div>
+                            </div>
+                        </div>
+                        <div class="details__today-item">
+                            <div class="details__today-item__title">Влажность</div>
+                            <div class="details__today-item__descr">84 <span>%</span></div>
+                            <div class="details__today-item__range">
+                                <div class="range">
+                                    <div>0</div>
+                                    <div>50</div>
+                                    <div>100</div>
+                                </div>
+
+                                <div class="humidity-scale">
+                                    <div class="humidity-scale__fill"></div>
+                                </div>
+                                <span>%</span>
+                            </div>
+                        </div>
+                        <div class="details__today-item">
+                            <div class="details__today-item__title">Видимость</div>
+                            <div class="details__today-item__descr">6.2 <span>км</span></div>
+                        </div>
+                        <div class="details__today-item">
+                            <div class="details__today-item__title">Давление</div>
+                            <div class="details__today-item__descr">742 <span class="small-text">мм рт. ст.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
