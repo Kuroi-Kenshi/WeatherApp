@@ -3,15 +3,32 @@
         grid-template-columns: minmax(25rem, 33rem) minmax(40rem, auto)
 
     .weather-details
-        padding: 0 13rem
+        padding: 0 11rem
         .wrapper
             margin: 6rem auto
 
+    // .search-form
+    //     flex-direction: column
+    //     align-items: center
+    //     &__input
+    //         width: 100%
+    //     .search-input
+    //         width: 100%
     .search-form
-        flex-direction: column
-        align-items: center
+        display: grid
+        grid-template-rows: 1fr
+        justify-items: center
+        justify-content: stretch
+        width: 100%
         &__input
+            order: 1
             width: 100%
+        .search-input
+            width: 100%
+        .btn-search-city
+            order: 3
+        .error-message
+            order: 2
 
     .btn-search__m-top
         margin-top: 2rem
@@ -26,9 +43,6 @@
 
     .weather-today__degrees
         margin-top: 19rem
-
-    .search-input
-        width: 100%
 
 @media (max-width:940px)
     .App
@@ -52,7 +66,7 @@
     .weather-today
         background-position: center 6rem
         .wrapper
-            padding: 3rem
+            padding: 2rem
 
     .weather-today__conditions-img
         margin-top: 0
@@ -72,13 +86,21 @@
         justify-items: center
     .weather-slider__arrows
         display: none
-    .weather-slider-week
-        overflow: inherit
-        height: 100%
+    .weather-slider__container
+        display: none
+        grid-template-columns: repeat(auto-fill, minmax(100px, 100px))
         justify-content: space-evenly
+        gap: 2.4rem 2.4rem
+        position: relative
+        height: 100%
+        &.active
+            display: grid
+
     .weather-details__tabs
-        gap: 3rem
-        justify-content: center
+        gap: 4rem
+
+    .weather-btn
+        margin: 0
 
     .search-input
         width: 100%

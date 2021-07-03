@@ -1,10 +1,13 @@
-.dark-theme
-    @include setColor($color: $light-gray)
+// .dark-theme
+//     @include setColor($color: $light-gray)
 
 .dark-theme
     .weather-today
         @include setColor($dark, $light-gray)
-        .btn-search-city
+        .btn-search-city,
+        .weather-today__degrees,
+        .weather-today__degrees span,
+        .weather-today__conditions-descr
             color: $light-gray
 
     .search-panel
@@ -25,25 +28,26 @@
         @include setColor(#100E1C, $light-gray)
         box-shadow: 0 0.2rem 1.5rem 0.2rem rgba(0, 0, 0, 0.2) inset
 
-        .weather-details__week,
-        .weather-details__hourly
+        .weather-btn
             @include setColor($color: #6D6D6D)
             &.active
                 border-bottom-color: $light-gray
                 @include setColor($color: $light-gray)
 
-        .weather-details__header
-            @include setColor($color: $light-gray)
+        .weather-details__header,
+        .weather-details__title
+            color: $light-gray
 
         .weather-slider__item
             @include setColor($dark, $light-gray)
 
         .weather-slider__item-title,
-        .weather-slider__degree-max
+        .weather-slider__degree-max,
+        .weather-slider__item-degree
             @include setColor($color: $light-gray)
 
         .weather-slider__degree-min
-            @include setColor($color: #6D6D6D)
+            color: #6D6D6D
 
         .arrow-prev,
         .arrow-next
@@ -58,8 +62,9 @@
         .details__today-item
             @include setColor($dark)
 
+        .details__today-item__title,
         .details__today-item__descr,
-        .details__today-item__title
+        .details__today-item__descr span,
             color: $light-gray
 
         .details__today-item__range

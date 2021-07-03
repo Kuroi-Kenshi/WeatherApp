@@ -1,0 +1,238 @@
+import { APY_KEY, cityDataUrl, cityName, getData } from './getData.js';
+import { sliderSwitchTabs, switchSlides } from './slider.js';
+
+const LOADER_ANIMATION = `
+<div class="loader active">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+`;
+
+export let weatherData = null;
+
+const detailsTodayItem = document.querySelectorAll('.details__today-item');
+const weatherSliderItem = document.querySelectorAll('.weather-slider__item');
+const weatherTodayDate = document.querySelector('.weather-today__date');
+const detailsToday = document.getElementById('details__today');
+const weather = document.getElementById('weather-slider__container');
+const weatherConditions = document.querySelector('.weather-today__conditions');
+const todayDate = document.querySelector('.weather-today__date');
+const cityLocation = document.getElementById('city');
+const searchPanel = document.getElementById('search-panel');
+const errorMessage = document.querySelector('.error-message');
+const loader = document.querySelector('.loader');
+
+const renderTodayForcast = () => {
+  let date = new Date(weatherData.current.dt * 1000).toLocaleDateString('ru-RU', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  });
+  let weatherCity = cityName.toLowerCase();
+  let weatherDescr = weatherData.current.weather[0].description;
+
+  date = date[0].toUpperCase() + date.slice(1);
+  weatherDescr = weatherDescr[0].toUpperCase() + weatherDescr.slice(1);
+  cityLocation.innerText = weatherCity[0].toUpperCase() + weatherCity.slice(1);
+
+  const forcast = `
+        <img src="http://openweathermap.org/img/wn/${
+          weatherData.current.weather[0].icon
+        }@4x.png" alt="condition" class="weather-today__conditions-img">
+        <div class="weather-today__degrees">
+        ${Math.round(weatherData.current.temp)} <span>&degC</span>
+        </div>
+        <div class="weather-today__conditions-descr">${weatherDescr}</div>
+        <div class="weather-today__feels-like">Ощущается как ${Math.round(
+          weatherData.current.feels_like
+        )} &deg<span>C</span></div>
+    `;
+  weatherConditions.innerHTML = forcast;
+  todayDate.innerHTML = `
+        <div>Сегодня</div>
+        <div>${date}</div>
+    `;
+};
+
+export const renderDayCards = () => {
+  weather.innerHTML = '';
+  weatherData.daily.forEach((el, idx) => {
+    if (idx > 0) {
+      let date = new Date(el.dt * 1000).toLocaleDateString('ru-RU', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short',
+      });
+      date = date[0].toUpperCase() + date.slice(1);
+
+      let card = `
+        <li class="weather-slider__item">
+            <div class="weather-slider__item-title">${
+              idx === 1 ? 'Завтра' : date
+            }</div>
+            <img src="http://openweathermap.org/img/wn/${
+              el.weather[0].icon
+            }@2x.png" alt="Weather Icon" class="weather-slider__item-img">
+            <div class="weather-slider__item-degree">
+                <div class="weather-slider__degree-max">${Math.round(
+                  el.temp.max
+                )} &degC</div>
+                <div class="weather-slider__degree-min">${Math.round(
+                  el.temp.min
+                )} &degC</div>
+            </div>
+        </li>`;
+
+      weather.insertAdjacentHTML('beforeend', card);
+    }
+  });
+};
+
+export const renderHourCards = () => {
+  weather.innerHTML = '';
+  weatherData.hourly.forEach((el, idx) => {
+    if (idx < 12) {
+      let date = new Date(el.dt * 1000);
+      date = date.getHours();
+      let card = `
+          <li class="weather-slider__item">
+              <div class="weather-slider__item-title">${date}:00</div>
+              <img src="http://openweathermap.org/img/wn/${
+                el.weather[0].icon
+              }@2x.png" alt="Weather Icon" class="weather-slider__item-img">
+              <div class="weather-slider__item-degree">${Math.round(
+                el.temp
+              )} &degC</div>
+          </li>`;
+
+      weather.insertAdjacentHTML('beforeend', card);
+    }
+  });
+};
+
+const renderDetailCards = () => {
+  const currentWindDeg = weatherData.current.wind_deg;
+
+  let cards = `
+  <div class="details__today-item">
+    <div class="details__today-item__title">Скорость ветра</div>
+    <div class="details__today-item__descr">${Math.round(
+      weatherData.current.wind_speed
+    )} <span>м/с</span></div>
+    <div class="details__today-item__indicator">
+        <div class="wind-route">
+            <img src="./icons/wind-route.svg" alt="wind-route" class="wind-route-img" id="wind-route">
+        </div>
+        <div class="wind-route-text" id="wind-route-text"></div>
+    </div>
+  </div>
+    <div class="details__today-item">
+        <div class="details__today-item__title">Влажность</div>
+        <div class="details__today-item__descr">${
+          weatherData.current.humidity
+        } <span>%</span></div>
+        <div class="details__today-item__range">
+            <div class="range">
+                <div>0</div>
+                <div>50</div>
+                <div>100</div>
+            </div>
+
+            <div class="humidity-scale">
+                <div class="humidity-scale__fill" id='humidity-scale__fill'></div>
+            </div>
+            <span>%</span>
+        </div>
+    </div>
+    <div class="details__today-item">
+        <div class="details__today-item__title">Видимость</div>
+        <div class="details__today-item__descr">${Math.round(
+          weatherData.current.visibility / 1000
+        )} <span>км</span></div>
+    </div>
+    <div class="details__today-item">
+        <div class="details__today-item__title">Давление</div>
+        <div class="details__today-item__descr">${
+          weatherData.current.pressure
+        } <span class="small-text">мм рт. ст.</span>
+        </div>
+    </div>
+    `;
+
+  detailsToday.innerHTML = cards;
+  // detailsToday.insertAdjacentHTML('beforebegin', cards);
+
+  const windRoute = document.getElementById('wind-route');
+  const windRouteText = document.getElementById('wind-route-text');
+  windRouteText.textContent = degreesToDirection(currentWindDeg);
+  windRoute.style.transform = `rotate(${currentWindDeg + 225}deg)`;
+  document.getElementById(
+    'humidity-scale__fill'
+  ).style.width = `${weatherData.current.humidity}%`;
+};
+
+const degreesToDirection = (degrees) => {
+  const directions = ['С', 'СВ', 'В', 'ЮВ', 'Ю', 'ЮЗ', 'З', 'СЗ'];
+  let i = 0;
+  if (degrees > 22.5 && degrees <= 67.5) i = 1;
+  if (degrees > 67.5 && degrees <= 112.5) i = 2;
+  if (degrees > 112.5 && degrees <= 157.5) i = 3;
+  if (degrees > 157.5 && degrees <= 202.5) i = 4;
+  if (degrees > 202.5 && degrees <= 247.5) i = 5;
+  if (degrees > 247.5 && degrees <= 292.5) i = 6;
+  if (degrees > 292.5 && degrees <= 337.5) i = 7;
+  return directions[i];
+};
+
+async function getWeatherData(url) {
+  setLoader();
+  const cityData = await getData(url);
+  if (cityData.length === 0) {
+    renderErrorMessage();
+  } else {
+    loader.classList.add('active');
+    const { lat, lon } = cityData[0];
+    const weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APY_KEY}&units=metric&lang=ru`;
+    let data = await getData(weatherApi);
+    weatherData = data;
+    renderData();
+    searchPanel.classList.remove('active');
+  }
+}
+
+function renderErrorMessage() {
+  errorMessage.classList.add('active');
+}
+
+function startDownloadData() {
+  getWeatherData(cityDataUrl);
+}
+
+export function setLoader() {
+  detailsTodayItem.forEach((el) => {
+    el.innerHTML = LOADER_ANIMATION;
+  });
+
+  weatherSliderItem.forEach((el) => {
+    el.innerHTML = LOADER_ANIMATION;
+  });
+
+  weatherTodayDate.innerHTML = LOADER_ANIMATION;
+}
+
+function renderData() {
+  renderDetailCards();
+  renderDayCards();
+  renderTodayForcast();
+
+  switchSlides();
+  sliderSwitchTabs();
+  errorMessage.classList.remove('active');
+  loader.classList.remove('active');
+}
+
+export default startDownloadData;

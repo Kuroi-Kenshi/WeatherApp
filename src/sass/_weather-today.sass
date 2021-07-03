@@ -21,7 +21,8 @@
     outline: none
     font-weight: 700
     font-size: 1.8rem
-    @include setColor($color: $gray)
+    color: $gray
+    // @include setColor($color: $gray)
     background-color: transparent
     cursor: pointer
 
@@ -40,19 +41,24 @@
     font-size: 9.6rem
     font-weight: 900
     line-height: 11.3rem
+    color: $gray
     span
         font-weight: 500
         font-size: 5rem
+        color: $gray
 
 .weather-today__conditions-descr
     font-size: 3.6rem
     font-weight: 700
+    text-align: center
+    color: $gray
 
 .weather-today__feels-like
     margin-top: 1.7rem
     font-size: 1.8rem
     font-weight: 400
-    @include setColor($color: $hint)
+    color: $hint
+    // @include setColor($color: $hint)
 
 .weather-today__date
     display: flex
@@ -60,7 +66,8 @@
     margin-top: 7.8rem
     font-size: 1.8rem
     font-weight: 400
-    @include setColor($color: $hint)
+    color: $hint
+    // @include setColor($color: $hint)
 
 .weather-today__location
     display: flex
@@ -68,7 +75,8 @@
     align-items: center
     font-size: 1.8rem
     font-weight: 400
-    @include setColor($color: $hint)
+    color: $hint
+    // @include setColor($color: $hint)
     margin-top: 2.8rem
     img
         margin-right: 0.8rem
@@ -87,7 +95,8 @@
         width: 2rem
         height: 2rem
         margin: 0.4rem 0.5rem
-        @include setColor($gray)
+        background-color: $gray
+        // @include setColor($gray)
         border-radius: 100%
         svg
             position: relative
@@ -97,7 +106,8 @@
     &.dark
         div
             transform: translateX(150%)
-            @include setColor(#EC6E4D)
+            background-color: #EC6E4D
+            // @include setColor(#EC6E4D)
         svg
             path
                 fill: #212331

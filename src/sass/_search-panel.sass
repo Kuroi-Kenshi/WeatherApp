@@ -4,7 +4,8 @@
     position: absolute
     top: 0
     left: -100%
-    @include setColor(#fff)
+    background-color: #fff
+    // @include setColor(#fff)
     &.active
         left: 0
     .wrapper
@@ -23,13 +24,15 @@
             top: 3px
             width: 3rem
             height: 0.25rem
-            @include setColor($gray)
+            background-color: $gray
+            // @include setColor($gray)
             transform: rotate(45deg)
         span:last-child
             display: block
             width: 3rem
             height: 0.25rem
-            @include setColor($gray)
+            background-color: $gray
+            // @include setColor($gray)
             transform: rotate(-45deg)
 
 .search-form
@@ -37,6 +40,7 @@
     justify-content: space-between
     margin-top: 4.6rem
     position: relative
+    flex-wrap: wrap
     .search-form__input
         position: relative
     .search-form__input:before
@@ -58,9 +62,26 @@
     padding: 1.3rem
     padding-left: 4rem
     outline: none
-    @include setColor($color: $gray)
+    color: $gray
+    // @include setColor($color: $gray)
     font-size: 1.8rem
     font-weight: 500
 
 .btn-search__small
     width: 9.7rem
+
+.error-message
+    display: none
+    margin-top: 20px
+    color: #F18C72
+    font-size: 18px
+    font-weight: 500
+    &.active
+        display: block
+
+.loader
+    display: none
+    width: 100%
+    justify-content: center
+    &.active
+        display: flex
