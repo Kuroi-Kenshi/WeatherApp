@@ -1,4 +1,4 @@
-import startDownloadData, { setLoader } from './render.js';
+import { startDownloadData } from './modules/render.js';
 
 const searchBtn = document.getElementById('btn-search');
 const searchCloseBtn = document.getElementById('close-btn');
@@ -19,5 +19,4 @@ themeSwitcher.addEventListener('click', () => {
   main.classList.toggle('dark-theme');
 });
 
-// setLoader();
 startDownloadData();

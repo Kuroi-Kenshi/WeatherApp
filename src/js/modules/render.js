@@ -12,19 +12,32 @@ const LOADER_ANIMATION = `
 </div>
 `;
 
-export let weatherData = null;
+let weatherData = null;
 
+const detailsToday = document.getElementById('details__today');
+const weather = document.getElementById('weather-slider__container');
+const cityLocation = document.getElementById('city');
+const searchPanel = document.getElementById('search-panel');
 const detailsTodayItem = document.querySelectorAll('.details__today-item');
 const weatherSliderItem = document.querySelectorAll('.weather-slider__item');
 const weatherTodayDate = document.querySelector('.weather-today__date');
-const detailsToday = document.getElementById('details__today');
-const weather = document.getElementById('weather-slider__container');
 const weatherConditions = document.querySelector('.weather-today__conditions');
 const todayDate = document.querySelector('.weather-today__date');
-const cityLocation = document.getElementById('city');
-const searchPanel = document.getElementById('search-panel');
 const errorMessage = document.querySelector('.error-message');
 const loader = document.querySelector('.loader');
+
+function checkCityName(cityName) {
+  const name = cityName.toLowerCase().split('');
+  const arrCityName = [];
+  for (let i = 0; i < name.length; i++) {
+    if (i === 0 || name[i - 1] === '-') {
+      arrCityName.push(name[i].toUpperCase());
+    } else {
+      arrCityName.push(name[i]);
+    }
+  }
+  return arrCityName.join('');
+}
 
 const renderTodayForcast = () => {
   let date = new Date(weatherData.current.dt * 1000).toLocaleDateString('ru-RU', {
@@ -32,12 +45,12 @@ const renderTodayForcast = () => {
     day: 'numeric',
     month: 'short',
   });
-  let weatherCity = cityName.toLowerCase();
-  let weatherDescr = weatherData.current.weather[0].description;
 
+  let weatherDescr = weatherData.current.weather[0].description;
   date = date[0].toUpperCase() + date.slice(1);
   weatherDescr = weatherDescr[0].toUpperCase() + weatherDescr.slice(1);
-  cityLocation.innerText = weatherCity[0].toUpperCase() + weatherCity.slice(1);
+
+  cityLocation.innerText = checkCityName(cityName);
 
   const forcast = `
         <img src="http://openweathermap.org/img/wn/${
@@ -58,7 +71,7 @@ const renderTodayForcast = () => {
     `;
 };
 
-export const renderDayCards = () => {
+const renderDayCards = () => {
   weather.innerHTML = '';
   weatherData.daily.forEach((el, idx) => {
     if (idx > 0) {
@@ -92,7 +105,7 @@ export const renderDayCards = () => {
   });
 };
 
-export const renderHourCards = () => {
+const renderHourCards = () => {
   weather.innerHTML = '';
   weatherData.hourly.forEach((el, idx) => {
     if (idx < 12) {
@@ -164,7 +177,6 @@ const renderDetailCards = () => {
     `;
 
   detailsToday.innerHTML = cards;
-  // detailsToday.insertAdjacentHTML('beforebegin', cards);
 
   const windRoute = document.getElementById('wind-route');
   const windRouteText = document.getElementById('wind-route-text');
@@ -175,7 +187,7 @@ const renderDetailCards = () => {
   ).style.width = `${weatherData.current.humidity}%`;
 };
 
-const degreesToDirection = (degrees) => {
+function degreesToDirection(degrees) {
   const directions = ['С', 'СВ', 'В', 'ЮВ', 'Ю', 'ЮЗ', 'З', 'СЗ'];
   let i = 0;
   if (degrees > 22.5 && degrees <= 67.5) i = 1;
@@ -186,7 +198,7 @@ const degreesToDirection = (degrees) => {
   if (degrees > 247.5 && degrees <= 292.5) i = 6;
   if (degrees > 292.5 && degrees <= 337.5) i = 7;
   return directions[i];
-};
+}
 
 async function getWeatherData(url) {
   setLoader();
@@ -235,4 +247,4 @@ function renderData() {
   loader.classList.remove('active');
 }
 
-export default startDownloadData;
+export { startDownloadData, renderDayCards, renderHourCards };

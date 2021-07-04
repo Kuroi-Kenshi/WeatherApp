@@ -1,4 +1,4 @@
-import startDownloadData from './render.js';
+import { startDownloadData } from './render.js';
 
 const searchForm = document.forms.searchCityForm;
 const btnSearchCity = document.getElementById('btn-search-city');
@@ -25,6 +25,7 @@ btnSearchCity.addEventListener('click', (e) => {
   e.preventDefault();
   const inputValue = new FormData(searchForm);
   cityName = inputValue.get('searchCity');
+  // cityName = checkCityName(city);
   cityDataUrl = `https://nominatim.openstreetmap.org/search.php?q=${cityName}&format=json&addressdetails=1&limit=1`;
   startDownloadData();
   searchForm.reset();

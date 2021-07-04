@@ -1,6 +1,5 @@
 .weather-details
     background-color: #F1F1F1
-    // @include setColor(#F1F1F1)
     padding: 0 7.8rem
     transition: 0.5s
     box-shadow: 0rem -0.5rem 1rem 0rem rgba(30, 60, 80, 0.2) inset
@@ -76,7 +75,6 @@
     min-height: 143px
     padding: 1.7rem 0
     background-color: #fff
-    // @include setColor(#fff)
     &.weather-slider__item:last-child
         margin-right: 0
 
@@ -84,7 +82,6 @@
     font-size: 1.4rem
     font-weight: 400
     color: $gray
-    // @include setColor($color: $gray)
 
 .weather-slider__item-degree
     width: 100%
@@ -93,18 +90,6 @@
     font-size: 1.4rem
     font-weight: 400
     color: $gray
-
-.weather-slider__degree-max,
-.weather-slider__degree-min
-    // font-size: 1.4rem
-    // font-weight: 400
-    color: $gray
-    // @include setColor($color: $gray)
-
-// .weather-slider__degree-min
-    // font-size: 1.4rem
-    // font-weight: 400
-    // @include setColor($color: $gray)
 
 .weather-slider__item-img
     position: absolute
@@ -128,14 +113,14 @@
             left: 45%
             transform: translate(-50%) rotate(-35deg)
             border-radius: 1rem
-            background-color: #acacac
+            background-color: $hint
         span:last-child
             position: relative
             top: 5%
             left: 45%
             transform: translate(-50%) rotate(35deg)
             border-radius: 1rem
-            background-color: #acacac
+            background-color: $hint
         &.inactive
             opacity: 0.3
 
@@ -149,14 +134,14 @@
             left: 35%
             transform: rotate(35deg)
             border-radius: 1rem
-            background-color: #acacac
+            background-color: $hint
         span:last-child
             position: relative
             top: 5%
             left: 35%
             transform: rotate(-35deg)
             border-radius: 1rem
-            background-color: #acacac
+            background-color: $hint
         &.inactive
             opacity: 0.3
 

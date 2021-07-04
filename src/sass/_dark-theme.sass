@@ -1,6 +1,3 @@
-// .dark-theme
-//     @include setColor($color: $light-gray)
-
 .dark-theme
     .weather-today
         @include setColor($dark, $light-gray)
@@ -32,7 +29,7 @@
             @include setColor($color: #6D6D6D)
             &.active
                 border-bottom-color: $light-gray
-                @include setColor($color: $light-gray)
+                color: $light-gray
 
         .weather-details__header,
         .weather-details__title

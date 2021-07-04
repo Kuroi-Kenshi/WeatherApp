@@ -40,7 +40,7 @@ function switchSlides() {
 
 function sliderSwitchTabs() {
   sliderTabs.addEventListener('click', (event) => {
-    if (event.target.outerText === 'на неделю') {
+    if (event.target.textContent === 'на неделю') {
       weatherSlider.scrollLeft = 0;
       event.target.classList.add('active');
       hourlyBtnSwitcher.classList.remove('active');
@@ -51,7 +51,7 @@ function sliderSwitchTabs() {
       renderDayCards();
     }
 
-    if (event.target.outerText === 'почасовой') {
+    if (event.target.textContent === 'почасовой') {
       weatherSlider.scrollLeft = 0;
       event.target.classList.add('active');
       weeklyBtnSwitcher.classList.remove('active');

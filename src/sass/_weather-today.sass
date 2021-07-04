@@ -16,13 +16,12 @@
 .btn-search-city
     width: 18rem
     height: 5rem
-    border: 2px solid #ACACAC
+    border: 2px solid $hint
     border-radius: 10px
     outline: none
     font-weight: 700
     font-size: 1.8rem
     color: $gray
-    // @include setColor($color: $gray)
     background-color: transparent
     cursor: pointer
 
@@ -58,7 +57,6 @@
     font-size: 1.8rem
     font-weight: 400
     color: $hint
-    // @include setColor($color: $hint)
 
 .weather-today__date
     display: flex
@@ -67,7 +65,6 @@
     font-size: 1.8rem
     font-weight: 400
     color: $hint
-    // @include setColor($color: $hint)
 
 .weather-today__location
     display: flex
@@ -76,7 +73,6 @@
     font-size: 1.8rem
     font-weight: 400
     color: $hint
-    // @include setColor($color: $hint)
     margin-top: 2.8rem
     img
         margin-right: 0.8rem
@@ -85,7 +81,7 @@
     position: relative
     width: 6.4rem
     height: 3.2rem
-    border: 0.2rem solid #ACACAC
+    border: 0.2rem solid $hint
     box-sizing: border-box
     border-radius: 1.6rem
     cursor: pointer
@@ -96,7 +92,6 @@
         height: 2rem
         margin: 0.4rem 0.5rem
         background-color: $gray
-        // @include setColor($gray)
         border-radius: 100%
         svg
             position: relative
@@ -107,7 +102,6 @@
         div
             transform: translateX(150%)
             background-color: #EC6E4D
-            // @include setColor(#EC6E4D)
         svg
             path
-                fill: #212331
+                fill: $dark
