@@ -22,12 +22,15 @@
             order: 3
         .error-message
             order: 2
+        .loader
+            &.active
+                order: 2
 
     .btn-search__m-top
         margin-top: 2rem
 
     .weather-today
-        background-position: center 33%
+        background-position: center 26%
         .wrapper
             padding: 5rem 2rem
 
@@ -35,16 +38,18 @@
         margin-top: 23rem
 
     .weather-today__degrees
-        margin-top: 19rem
+        margin-top: 16rem
 
 @media (max-width:940px)
     .App
         grid-template-columns: minmax(26rem, auto) minmax(50rem, auto)
 
     .weather-today
-        background-position: center 33%
+        background-position: center 35%
         .wrapper
             padding: 5.3rem 1.2rem
+        .weather-today__conditions-descr
+            font-size: 3.3rem
 
     .btn-search-city
         width: 16rem
@@ -59,7 +64,7 @@
     .weather-today
         background-position: center 6rem
         .wrapper
-            padding: 2rem
+            padding: 2.7rem
 
     .weather-today__conditions-img
         margin-top: 0
