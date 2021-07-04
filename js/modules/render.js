@@ -16,13 +16,13 @@ let weatherData = null;
 
 const detailsToday = document.getElementById('details__today');
 const weather = document.getElementById('weather-slider__container');
-const cityLocation = document.getElementById('city');
 const searchPanel = document.getElementById('search-panel');
 const detailsTodayItem = document.querySelectorAll('.details__today-item');
 const weatherSliderItem = document.querySelectorAll('.weather-slider__item');
 const weatherTodayDate = document.querySelector('.weather-today__date');
 const weatherConditions = document.querySelector('.weather-today__conditions');
 const todayDate = document.querySelector('.weather-today__date');
+const weatherLocation = document.querySelector('.weather-today__location');
 const errorMessage = document.querySelector('.error-message');
 const loader = document.querySelector('.loader');
 
@@ -50,8 +50,6 @@ const renderTodayForcast = () => {
   date = date[0].toUpperCase() + date.slice(1);
   weatherDescr = weatherDescr[0].toUpperCase() + weatherDescr.slice(1);
 
-  cityLocation.innerText = checkCityName(cityName);
-
   const forcast = `
         <img src="http://openweathermap.org/img/wn/${
           weatherData.current.weather[0].icon
@@ -68,6 +66,10 @@ const renderTodayForcast = () => {
   todayDate.innerHTML = `
         <div>Сегодня</div>
         <div>${date}</div>
+    `;
+  weatherLocation.innerHTML = `
+      <img src="./icons/location-pic.svg" alt="">
+      <div id="city">${checkCityName(cityName)}</div>
     `;
 };
 
