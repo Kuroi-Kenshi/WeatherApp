@@ -198,7 +198,6 @@ function degreesToDirection(degrees) {
   return directions[i];
 }
 
-const delay = (ms = 3000) => new Promise((res) => setTimeout(res, ms))
 async function getWeatherData(url) {
   setLoader();
   
@@ -242,8 +241,6 @@ export async function setLoader() {
 }
 
 async function renderData() {
-  await delay(1000)
-
   renderDetailCards();
   renderDayCards();
   renderTodayForcast();
