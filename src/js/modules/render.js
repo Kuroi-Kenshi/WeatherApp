@@ -14,15 +14,8 @@ const LOADER_ANIMATION = `
 
 let weatherData = null;
 
-const detailsToday = document.getElementById('details__today');
 const weather = document.getElementById('weather-slider__container');
 const searchPanel = document.getElementById('search-panel');
-const detailsTodayItem = document.querySelectorAll('.details__today-item');
-const weatherSliderItem = document.querySelectorAll('.weather-slider__item');
-const weatherTodayDate = document.querySelector('.weather-today__date');
-const weatherConditions = document.querySelector('.weather-today__conditions');
-const todayDate = document.querySelector('.weather-today__date');
-const weatherLocation = document.querySelector('.weather-today__location');
 const errorMessage = document.querySelector('.error-message');
 const loader = document.querySelector('.loader');
 
@@ -40,6 +33,10 @@ function checkCityName(cityName) {
 }
 
 const renderTodayForcast = () => {
+  const weatherConditions = document.querySelector('.weather-today__conditions');
+  const todayDate = document.querySelector('.weather-today__date');
+  const weatherLocation = document.querySelector('.weather-today__location');
+
   let date = new Date(weatherData.current.dt * 1000).toLocaleDateString('ru-RU', {
     weekday: 'short',
     day: 'numeric',
@@ -129,12 +126,13 @@ const renderHourCards = () => {
   });
 };
 
+const getCardHTML = (internalHTML) => `<div class="details__today-item">${internalHTML}</div>`
 const renderDetailCards = () => {
   const currentWindDeg = weatherData.current.wind_deg;
 
   let cards = `
-  <div class="details__today-item">
-    <div class="details__today-item__title">Скорость ветра</div>
+  ${
+    getCardHTML(`<div class="details__today-item__title">Скорость ветра</div>
     <div class="details__today-item__descr">${Math.round(
       weatherData.current.wind_speed
     )} <span>м/с</span></div>
@@ -143,9 +141,8 @@ const renderDetailCards = () => {
             <img src="./icons/wind-route.svg" alt="wind-route" class="wind-route-img" id="wind-route">
         </div>
         <div class="wind-route-text" id="wind-route-text"></div>
-    </div>
-  </div>
-    <div class="details__today-item">
+    </div>`)}
+  ${getCardHTML(`
         <div class="details__today-item__title">Влажность</div>
         <div class="details__today-item__descr">${
           weatherData.current.humidity
@@ -161,23 +158,22 @@ const renderDetailCards = () => {
                 <div class="humidity-scale__fill" id='humidity-scale__fill'></div>
             </div>
             <span>%</span>
-        </div>
-    </div>
-    <div class="details__today-item">
+        </div>`)}
+    ${getCardHTML(`
         <div class="details__today-item__title">Видимость</div>
-        <div class="details__today-item__descr">${Math.round(
-          weatherData.current.visibility / 1000
-        )} <span>км</span></div>
-    </div>
-    <div class="details__today-item">
+        <div class="details__today-item__descr">${
+          Math.round(weatherData.current.visibility / 1000)
+        } <span>км</span>
+        </div>
+      <div class="details__today-item">
         <div class="details__today-item__title">Давление</div>
         <div class="details__today-item__descr">${
           weatherData.current.pressure
         } <span class="small-text">мм рт. ст.</span>
-        </div>
-    </div>
+        </div>`)}
     `;
-
+    const detailsToday = document.getElementById('details__today');
+  // detailsToday.style.border = '1px solid red'
   detailsToday.innerHTML = cards;
 
   const windRoute = document.getElementById('wind-route');
@@ -202,8 +198,10 @@ function degreesToDirection(degrees) {
   return directions[i];
 }
 
+const delay = (ms = 3000) => new Promise((res) => setTimeout(res, ms))
 async function getWeatherData(url) {
   setLoader();
+  
   const cityData = await getData(url);
   if (cityData.length === 0) {
     renderErrorMessage();
@@ -213,6 +211,7 @@ async function getWeatherData(url) {
     const weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APY_KEY}&units=metric&lang=ru`;
     let data = await getData(weatherApi);
     weatherData = data;
+    await delay(1000)
     renderData();
     searchPanel.classList.remove('active');
   }
@@ -226,7 +225,11 @@ function startDownloadData() {
   getWeatherData(cityDataUrl);
 }
 
-export function setLoader() {
+export async function setLoader() {
+  const detailsTodayItem = document.querySelectorAll('.details__today-item');
+  const weatherSliderItem = document.querySelectorAll('.weather-slider__item');
+  const weatherTodayDate = document.querySelector('.weather-today__date');
+
   detailsTodayItem.forEach((el) => {
     el.innerHTML = LOADER_ANIMATION;
   });
@@ -238,7 +241,9 @@ export function setLoader() {
   weatherTodayDate.innerHTML = LOADER_ANIMATION;
 }
 
-function renderData() {
+async function renderData() {
+  await delay(1000)
+
   renderDetailCards();
   renderDayCards();
   renderTodayForcast();
