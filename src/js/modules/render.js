@@ -22,7 +22,7 @@ function checkCityName(cityName) {
   const name = cityName.toLowerCase().split('');
   const arrCityName = [];
   for (let i = 0; i < name.length; i++) {
-    if (i === 0 || name[i - 1] === '-') {
+    if (i === 0 || name[i - 1] === '-' || name[i - 1] === ' ') {
       arrCityName.push(name[i].toUpperCase());
     } else {
       arrCityName.push(name[i]);
